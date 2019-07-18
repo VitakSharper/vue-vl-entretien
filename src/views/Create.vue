@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col s6 offset-s3">
-            <h1>Cteate task</h1>
+            <h1 class="center-align">Create Task</h1>
             <form @submit.prevent="onValidate()">
                 <div class="input-field">
                     <input id="title" type="text" class="validate" required v-model="title">

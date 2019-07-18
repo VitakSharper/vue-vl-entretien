@@ -14,10 +14,18 @@
                           style="float: right; font-size: 12px;">{{description.length}}/2048</span>
                 </div>
                 <input type="text" ref="datepicker">
+                <div v-if="task.status!=='completed'">
+                    <button class="btn-floating small waves-effect waves-light green darken-4"
+                            type="submit"
+                            style="margin-right: 1rem;"
+                    ><i
+                            class="material-icons">update</i></button>
+                    <button class="waves-effect waves-teal btn-floating small blue darken-4" @click="completeTask()">
+                        <i class="material-icons small">send</i></button>
+                </div>
 
-                <button class="btn-floating btn-large waves-effect waves-light green darken-4" type="submit"><i
-                        class="material-icons">update</i></button>
             </form>
+
         </div>
         <h1 class="center-align red-text text-darken-4" v-else>Task Not Found!!</h1>
     </div>
@@ -48,7 +56,7 @@
 
             this.datepicker = M.Datepicker.init(this.$refs.datepicker, {
                 format: 'dd.mm.yyyy',
-                defaultDate: new Date(),
+                defaultDate: new Date(this.task.date),
                 setDefaultDate: true,
                 i18n: {
                     cancel: 'Annuler',
@@ -62,7 +70,15 @@
         },
         methods: {
             onValidate() {
-                this.$store.dispatch('createTask', task);
+                this.$store.dispatch('updateTask', {
+                    id: this.task.id,
+                    description: this.description,
+                    date: this.datepicker.date
+                });
+                this.$router.push('/list')
+            },
+            completeTask() {
+                this.$store.dispatch('completeTask', this.task.id);
                 this.$router.push('/list')
             }
         },

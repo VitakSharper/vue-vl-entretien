@@ -1,6 +1,6 @@
 <template>
     <div class="navbar-fixed">
-        <nav class="blue darken-3">
+        <nav class="deep-purple darken-4">
             <div class="nav-wrapper ">
                 <router-link to="/task" class="brand-logo">My Tasks</router-link>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
