@@ -1,0 +1,59 @@
+<template>
+    <div>
+        <h1>List pAGE</h1>
+        <hr>
+        <table v-if="tasks.length">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Open</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(task,index) of tasks" :key="task.id">
+                <td>{{index+1}}</td>
+                <td>{{task.title}}</td>
+                <td>{{new Date(task.date).toLocaleDateString()}}</td>
+                <td class="desc-cell">
+                    <div class="desc">{{task.description}}</div>
+                </td>
+                <td :style="{color:task.status==='active'?'green':'gray'}"><i class="material-icons">radio_button_checked</i>
+                </td>
+                <td>
+                    <router-link tag="button" class="waves-effect waves-teal btn-flat" :to="`/task/${task.id}`"><i
+                            class="material-icons">open_in_browser</i>
+                    </router-link>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p v-else>No tasks</p>
+    </div>
+</template>
+
+<script>
+    export default {
+        computed: {
+            tasks() {
+                return this.$store.getters.getTasks
+            }
+        }
+    }
+</script>
+
+<style scoped>
+    .desc {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .desc-cell {
+        max-width: 300px;
+    }
+</style>
