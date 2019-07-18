@@ -5,7 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        tasks: JSON.parse(localStorage.getItem('tasks') || '[]') // store the default from localStorage
+        tasks: JSON.parse(localStorage.getItem('tasks') || '[]').map(task => {
+            if (new Date(task.date) < new Date()) {
+                task.status = 'outdated'
+            }
+            return task
+        }) // store the default from localStorage
     },
     mutations: {
         createTask(state, task) {

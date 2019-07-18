@@ -8,7 +8,7 @@
                     <option value="active">Active</option>
                     <option value="outdated">Outdated</option>
                     <option value="completed">Completed</option>
-                    <optgroup label="clear" v-if="filter">
+                    <optgroup label="clear" v-if="this.filter">
                         <option value="completed" @click="filter=null">Clear</option>
                     </optgroup>
                 </select>
@@ -37,7 +37,7 @@
                     <div class="desc">{{task.description}}</div>
                 </td>
                 <td style="font-weight: bold"
-                    :style="{color:task.status==='active'?'#536dfe':task.status==='completed'?'green':'gray'}">
+                    :style="{color:task.status==='active'?'#536dfe':task.status==='completed'?'#004d40':'#757575'}">
                     {{task.status}}
                 </td>
                 <td>
