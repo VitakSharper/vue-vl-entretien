@@ -54,15 +54,17 @@
 
 <script>
     import * as M from "materialize-css";
+    import {mapGetters} from 'vuex'
 
     export default {
         data: () => ({
             filter: null
         }),
         computed: {
-            tasks() {
-                return this.$store.getters.getTasks
-            },
+            ...mapGetters({
+                tasks: 'getTasks'
+            }),
+
             displayTasks() {
                 return this.tasks.filter(t => {
                     if (!this.filter) {
